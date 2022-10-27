@@ -1,16 +1,26 @@
 import React from 'react';
 import { useContext } from 'react';
-import { Image } from 'react-bootstrap';
+import { Button, Image } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { FaUser } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 
 
+
 const Header = () => {
-    const { user } = useContext(AuthContext)
+
+    const { user, logOut } = useContext(AuthContext);
+
+    const handleLogOut = () =>{
+        logOut()
+        .then(() =>{})
+        .catch(error => console.error(error))
+    }
+
     return (
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
             <Container>
@@ -34,12 +44,25 @@ const Header = () => {
                         </NavDropdown>
                     </Nav>
                     <Nav>
-                        {/* <Nav.Link href="/login">Login</Nav.Link>
-                        <Nav.Link href="/register">Register</Nav.Link> */}
-                        <Nav.Link href="#deets">{user?.displayName}</Nav.Link>
+                        
+                        <Nav.Link href="#deets">
+                            {
+                                user?.uid ?
+                                <>
+                                    <span>{user?.displayName}</span>
+                                    <Button variant="dark" onClick={handleLogOut}>LOg Out</Button>
+                                </>
+                                :
+                                <>
+                                    <Link to='/login'>Login</Link>
+                                    <Link to='/register'>Register</Link>
+                                </>
+                            }
+                            
+                        </Nav.Link>
                         <Nav.Link eventKey={2} href="#memes">
-                            {user.photo ?
-                            <Image style={{height: '30px'}} roundedCircle src={user.photo}></Image>
+                            {user?.photo ?
+                            <Image style={{height: '30px'}} roundedCircle src={user?.photo}></Image>
                             : <FaUser></FaUser>
                             }
                         </Nav.Link>
