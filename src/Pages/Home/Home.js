@@ -3,7 +3,7 @@ import Carousel from 'react-bootstrap/Carousel';
 import banare1 from '../../Assets/imaiges/banare22.png';
 import banare2 from '../../Assets/imaiges/banare111.webp';
 import banare3 from '../../Assets/imaiges/banare333.jpeg';
-import { useLoaderData } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
@@ -56,7 +56,7 @@ const Home = () => {
                 </Carousel>
             </div>
             <div >
-                <h2>courses:{CourseDetails.length} </h2>
+                <h2>courses</h2>
 
                 {
                     CourseDetails.map(CourseDetails => <p key={CourseDetails.id}>
@@ -69,14 +69,14 @@ const Home = () => {
                                         <Card.Text>
 
                                         </Card.Text>
-                                        <Button variant="primary">Details</Button>
+                                        <Link to={`/courses/${CourseDetails.id}`}>
+                                            <Button variant="primary">Details</Button>
+                                        </Link>
                                     </Card.Body>
                                 </Card>
                             </div>
                         </div>
                     </p>)
-
-
                 }
 
             </div>

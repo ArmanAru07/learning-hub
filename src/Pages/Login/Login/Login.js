@@ -6,7 +6,7 @@ import { FaGithub, FaGoogle, FaMailBulk } from "react-icons/fa";
 import { useContext } from 'react';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 import { GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Card } from 'react-bootstrap';
 import { useState } from 'react';
 
@@ -31,7 +31,7 @@ const Login = () => {
                 console.log(user)
                 form.reset();
                 setError('');
-                navigate(from, {replace: true})
+                navigate(from, {replace: true});
             })
             .catch(error => {
                 console.error(error)
@@ -81,6 +81,7 @@ const Login = () => {
                     <Button variant="primary" type="submit">
                         Login
                     </Button>
+                    
                     <Form.Text className='text-danger'>
                         {error}
                     </Form.Text>
@@ -91,6 +92,8 @@ const Login = () => {
                             <Button onClick={handleGitHubLogin} className='m-3 rounded' variant="outline-dark"><FaGithub></FaGithub>Login with GitHub</Button>
                         </ButtonGroup>
                     </div>
+                    <small>Please register your account</small> <br />
+                    <Link to='/register' className='m-4'><Button variant="primary">Register</Button></Link>
                 </Form>
             </Card>
         </div>

@@ -54,6 +54,9 @@ const Register = () => {
                         <Form.Label>Password</Form.Label>
                         <Form.Control name="password" type="password" placeholder="Password" required />
                     </Form.Group>
+                    <Form.Group className="m-3" controlId="formBasicCheckbox">
+                        <Form.Check type="checkbox" label="Accept Terms and condition" />
+                    </Form.Group>
 
                     <Button className='m-4' variant="primary" type="submit">
                         Register

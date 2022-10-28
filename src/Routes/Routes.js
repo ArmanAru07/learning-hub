@@ -16,17 +16,17 @@ export const routes = createBrowserRouter([
             {
                 path: '/',
                 element: <Home></Home>,
-                loader: () => fetch('http://localhost:5004/course-details')
+                loader: () => fetch('https://learning-hub-server-tau.vercel.app/course-details')
             },
             {
                 path: '/courses',
                 element: <Courses></Courses>,
-                loader: () => fetch('http://localhost:5004/course-details')
+                loader: () => fetch('https://learning-hub-server-tau.vercel.app/course-details')
             },
             {
                 path:'/courses/:id',
                 element: <PrivateRoute><CourseDetails></CourseDetails></PrivateRoute>,
-                loader: ({params}) => fetch(`http://localhost:5004/course-details/${params.id}`)
+                loader: ({params}) => fetch(`https://learning-hub-server-tau.vercel.app/course-details/${params.id}`)
             },
             {
                 path: '/blog',
