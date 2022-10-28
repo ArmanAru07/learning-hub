@@ -3,18 +3,23 @@ import Carousel from 'react-bootstrap/Carousel';
 import banare1 from '../../Assets/imaiges/banare22.png';
 import banare2 from '../../Assets/imaiges/banare111.webp';
 import banare3 from '../../Assets/imaiges/banare333.jpeg';
+import { useLoaderData } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
 
 const Home = () => {
 
-        const [index, setIndex] = useState(0);
+    const [index, setIndex] = useState(0);
 
-        const handleSelect = (selectedIndex, e) => {
-            setIndex(selectedIndex);
-        };
+    const CourseDetails = useLoaderData();
 
-        return (
+    const handleSelect = (selectedIndex, e) => {
+        setIndex(selectedIndex);
+    };
+
+    return (
+        <div>
             <div>
-
                 <Carousel activeIndex={index} onSelect={handleSelect}>
                     <Carousel.Item>
                         <img
@@ -49,9 +54,35 @@ const Home = () => {
                         </Carousel.Caption>
                     </Carousel.Item>
                 </Carousel>
+            </div>
+            <div >
+                <h2>courses:{CourseDetails.length} </h2>
+
+                {
+                    CourseDetails.map(CourseDetails => <p key={CourseDetails.id}>
+                        <div className='row g-2'>
+                            <div className='my-4 col-lg-3 col-md-6 col-sm-12'>
+                                <Card style={{ width: '18rem' }}>
+                                    <Card.Img variant="top" src={CourseDetails.image} />
+                                    <Card.Body>
+                                        <Card.Title>{CourseDetails.CourseTitle}</Card.Title>
+                                        <Card.Text>
+
+                                        </Card.Text>
+                                        <Button variant="primary">Details</Button>
+                                    </Card.Body>
+                                </Card>
+                            </div>
+                        </div>
+                    </p>)
+
+
+                }
 
             </div>
-        );
-    };
 
-    export default Home;
+        </div>
+    );
+};
+
+export default Home;
