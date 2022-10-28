@@ -6,7 +6,7 @@ import { FaGithub, FaGoogle, FaMailBulk } from "react-icons/fa";
 import { useContext } from 'react';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 import { GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Card } from 'react-bootstrap';
 import { useState } from 'react';
 
@@ -14,6 +14,9 @@ const Login = () => {
     const [error, setError] = useState('');
     const { ProviderLogin, signIn } = useContext(AuthContext);
     const navigate = useNavigate();
+    const location = useLocation();
+
+    const from = location.state?.from?.pathname || '/';
 
     //email and pass
     const handleSubmit = event => {
@@ -21,14 +24,14 @@ const Login = () => {
         const form = event.target;
         const email = form.email.value;
         const password = form.password.value;
-        
+
         signIn(email, password)
             .then(result => {
                 const user = result.user;
                 console.log(user)
                 form.reset();
                 setError('');
-                navigate('/')
+                navigate(from, {replace: true})
             })
             .catch(error => {
                 console.error(error)
